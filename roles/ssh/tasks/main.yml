@@ -1,0 +1,38 @@
+---
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  become: false
+  tags: ssh
+
+- name: setup sshd_config
+  template:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+    mode: 0644
+    backup: true
+    validate: sshd -tD -f %s
+  become: true
+  tags: ssh
+
+- name: setup ssh.socket.d dir
+  file:
+    path: /etc/systemd/system/ssh.socket.d
+    state: directory
+  become: true
+  tags: ssh
+
+- name: setup ssh.socket override
+  template:
+    src: ssh.socket.d.override.conf
+    dest: /etc/systemd/system/ssh.socket.d/override.conf
+    mode: 0644
+  register: ssh_socket
+  notify:
+    - reload systemd
+    - start ssh.socket
+    - stop ssh.service
+  become: true      
+  tags: ssh

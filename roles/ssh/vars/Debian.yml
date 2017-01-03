@@ -1,0 +1,2 @@
+---
+ssh_sftp_subsystem_path: /usr/lib/openssh/sftp-server

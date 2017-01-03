@@ -1,0 +1,2 @@
+ssh_port: 22
+ssh_socket_bind_device: "{{ ansible_default_ipv4.interface }}"
