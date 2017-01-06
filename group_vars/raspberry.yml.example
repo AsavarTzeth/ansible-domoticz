@@ -1,0 +1,22 @@
+---
+# Users & Groups
+#users_default_shell: /bin/bash
+#users_create_primary_group: true
+#users:
+#  - name: user1
+#    gecos: Real Name
+#    primary_group: user1
+#    groups: ['group1','group2']
+#    shell: /bin/sh
+#    passwd: a-plain-text-password
+#    passwd_salt: a-unique-salt
+#    state: present
+#    ssh_authorized_keys:
+#      - "ssh-rsa AAAAA.... foo@machine"
+#      - "ssh-rsa AAAAB.... bar@machine"
+#    sudo: ALL=(ALL) ALL
+#
+#  - name: pi
+#    state: absent
+
+# SSH
