@@ -1,12 +1,15 @@
 ---
-- name: reload systemd
-  command: systemctl daemon-reload
-  become: true
-
 - name: start ssh.socket
-  service: name=ssh.socket state=started enabled=yes
+  systemd:
+    name: ssh.socket
+    state: started
+    enabled: true
+    daemon_reload: true
   become: true
 
 - name: stop ssh.service
-  service: name=ssh.service state=stopped enabled=no
-  become: true
+  systemd:
+    name: ssh.service
+    state: stopped
+    enabled: false
+  systemd: true

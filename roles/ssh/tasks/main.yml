@@ -29,9 +29,7 @@
     src: ssh.socket.d.override.conf
     dest: /etc/systemd/system/ssh.socket.d/override.conf
     mode: 0644
-  register: ssh_socket
   notify:
-    - reload systemd
     - start ssh.socket
     - stop ssh.service
   become: true      
