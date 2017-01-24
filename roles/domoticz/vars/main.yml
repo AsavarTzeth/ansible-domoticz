@@ -1,0 +1,8 @@
+---
+domoticz_url: https://www.domoticz.com
+domoticz_params:
+  - download.php?
+  - channel=stable&
+  - type=release&
+  - system={{ ansible_system | lower }}&
+  - machine={{ ansible_machine }}

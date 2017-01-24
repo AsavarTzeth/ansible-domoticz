@@ -1,0 +1,35 @@
+[Unit]
+Description=Domoticz Home Automation Service
+
+[Service]
+User=domoticz
+Group=domoticz
+ExecStart=/opt/domoticz/domoticz \
+-www 8080 -sslwww 0 \
+-wwwroot /opt/domoticz/www \
+-wwwbind 127.0.0.1 \
+-dbase /opt/domoticz/domoticz.db \
+-userdata /opt/domoticz/ \
+-notimestamps
+WorkingDirectory=/opt/domoticz
+Restart=on-failure
+RestartSec=1m
+
+PrivateTmp=true
+PrivateDevices=true
+PrivateNetwork=true
+ProtectHome=true
+# This fails for some reason, yet ReadOnlyDirectories works fine
+#ProtectSystem=full
+NoNewPrivileges=true
+
+ReadOnlyDirectories=/opt /proc /etc /run /usr -/bin -/sbin -/lib -/lib64
+ReadWriteDirectories=/opt/domoticz
+
+InaccessibleDirectories=/boot /etc -/lost+found /media /mnt /srv /sys \
+-/usr/games -/usr/include -/usr/local -/usr/share -/usr/src -/var/backups \
+-/var/cache -/var/lib -/var/local -/var/lock -/var/log -/var/mail -/var/opt \
+-/var/spool
+
+[Install]
+WantedBy=multi-user.target

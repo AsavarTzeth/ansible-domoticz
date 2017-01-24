@@ -1,0 +1,33 @@
+---
+- block:
+  - name: setup domoticz user
+    user:
+      name: domoticz
+      home: /opt/domoticz
+      shell: /bin/false
+      system: true
+
+  - block:
+    - name: get domoticz
+      get_url:
+        url: "{{ domoticz_url }}/{{ domoticz_params | join('') }}"
+        dest: /opt/domoticz
+      register: result
+
+    - name: extract files
+      unarchive:
+        src: /opt/domoticz/{{ result.dest | basename }}
+        dest: /opt/domoticz
+        remote_src: true
+
+    become_user: domoticz
+
+  - name: setup domoticz.service
+    template:
+      src: domoticz.service
+      dest: /etc/systemd/system/domoticz.service
+      mode: 0644
+    notify: restart domoticz
+
+  become: true
+  tags: domoticz
