@@ -1,0 +1,26 @@
+[Unit]
+Description=Secure Nginx Proxy for Domoticz
+Wants=domoticz.service
+After=network.target nginx.socket domoticz.service
+JoinsNamespaceOf=domoticz.service
+
+[Service]
+User=nginx
+Group=nginx
+Environment=NGINX=3:4;
+ExecStart=/usr/sbin/nginx -g "daemon off;"
+ExecReload=/usr/sbin/nginx -g "daemon off;" -s reload
+
+PrivateTmp=true
+PrivateDevices=true
+PrivateNetwork=true
+ProtectHome=true
+ProtectSystem=full
+NoNewPrivileges=true
+
+ReadOnlyDirectories=/proc /run /var/log /var/lib -/bin -/sbin -/lib -/lib64
+ReadWriteDirectories=/run/nginx /var/log/nginx /var/lib/nginx
+
+InaccessibleDirectories=-/lost+found /media /mnt /opt /srv /sys \
+-/usr/games -/usr/include -/usr/local -/usr/share -/usr/src -/var/backups \
+-/var/cache -/var/local -/var/lock -/var/mail -/var/opt -/var/spool

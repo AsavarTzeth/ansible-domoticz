@@ -1,0 +1,52 @@
+---
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  become: false
+  tags: nginx
+
+- name: install nginx
+  package:
+    name: "{{ nginx_pkg_name }}"
+    state: present
+  args:
+    update_cache: true 
+  become: true
+  tags: nginx
+
+- name: setup nginx service user
+  user:
+    name: nginx
+    shell: /usr/sbin/nologin
+    home: /
+    createhome: false
+    system: true
+  become: true
+  tags: nginx
+
+- name: setup nginx files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0644
+  with_items: "{{ nginx_files }}"
+  become: true
+  tags: nginx
+
+- name: add domoticz proxy config
+  file:
+    src: /etc/nginx/sites-available/domoticz
+    path: /etc/nginx/sites-enabled/domoticz
+    state: link
+  become: true
+  tags: nginx
+
+- name: enable nginx.socket
+  systemd:
+    name: nginx.socket
+    state: started
+    enabled: true
+    daemon_reload: true
+  become: true
+  tags: nginx

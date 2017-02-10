@@ -1,0 +1,14 @@
+---
+nginx_files:
+  - src: domoticz.j2
+    dest: /etc/nginx/sites-available/domoticz
+  - src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  - src: nginx.service.j2
+    dest: /etc/systemd/system/nginx.service
+  - src: nginx.socket.j2
+    dest: /etc/systemd/system/nginx.socket
+  - src: nginx.j2
+    dest: /etc/logrotate.d/nginx
+  - src: tmpfiles.d.nginx.conf.j2
+    dest: /etc/tmpfiles.d/nginx.conf
