@@ -12,6 +12,17 @@
     state: present
   args:
     update_cache: true 
+  register: install_result
+  become: true
+  tags: nginx
+
+- name: disable nginx.service
+  systemd:
+    name: nginx.service
+    state: stopped
+    enabled: false
+  when:
+    - install_result | changed
   become: true
   tags: nginx
 
@@ -25,20 +36,22 @@
   become: true
   tags: nginx
 
-- name: setup nginx files
+- name: setup nginx configs
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: 0644
-  with_items: "{{ nginx_files }}"
+  with_items: "{{ nginx_config }}"
   become: true
   tags: nginx
 
-- name: add domoticz proxy config
+- name: setup nginx files & permissions
   file:
-    src: /etc/nginx/sites-available/domoticz
-    path: /etc/nginx/sites-enabled/domoticz
-    state: link
+    src: "{{ item.src | default(omit) }}"
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+    owner: "{{ item.owner | default(omit) }}"
+  with_items: "{{ nginx_files }}"
   become: true
   tags: nginx
 
