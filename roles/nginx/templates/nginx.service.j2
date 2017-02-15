@@ -1,8 +1,7 @@
 [Unit]
 Description=Secure Nginx Proxy for Domoticz
-Wants=domoticz.service
-After=network.target nginx.socket domoticz.service
-JoinsNamespaceOf=domoticz.service
+Requires=nginx.socket
+After=network.target nginx.socket
 
 [Service]
 User=nginx

@@ -1,5 +1,9 @@
 [Unit]
 Description=Domoticz Home Automation Service
+Wants=nginx.service
+After=nginx.service
+PartOf=nginx.service
+JoinsNamespaceOf=nginx.service
 
 [Service]
 User=domoticz
