@@ -29,5 +29,11 @@
       mode: 0644
     notify: restart domoticz
 
+  - name: enable domoticz.service
+    systemd:
+      name: domoticz.service
+      enabled: true
+      daemon_reload: true
+
   become: true
   tags: domoticz
