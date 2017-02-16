@@ -3,7 +3,6 @@
   systemd:
     name: domoticz.service
     state: restarted
-    enabled: true
     daemon_reload: true
   become: true
   tags: domoticz
