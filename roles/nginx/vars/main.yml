@@ -17,9 +17,6 @@ nginx_files:
   - src: /etc/nginx/sites-available/domoticz
     path: /etc/nginx/sites-enabled/domoticz
     state: link
-  - src: /etc/nginx/sites-available/ha-bridge
-    path: /etc/nginx/sites-enabled/ha-bridge
-    state: link
   - path: /etc/nginx/sites-enabled/default
     state: absent
   - path: /var/lib/nginx
