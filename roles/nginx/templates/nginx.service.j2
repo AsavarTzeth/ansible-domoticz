@@ -20,6 +20,6 @@ NoNewPrivileges=true
 ReadOnlyDirectories=/proc /run /var/log /var/lib -/bin -/sbin -/lib -/lib64
 ReadWriteDirectories=/run/nginx /var/log/nginx /var/lib/nginx
 
-InaccessibleDirectories=-/lost+found /media /mnt /opt /srv /sys \
+InaccessibleDirectories=/boot -/lost+found /media /mnt /opt /srv /sys \
 -/usr/games -/usr/include -/usr/local -/usr/share -/usr/src -/var/backups \
--/var/cache -/var/local -/var/lock -/var/mail -/var/opt -/var/spool
+-/var/cache -/var/local -/var/lock -/var/mail -/var/opt -/var/spool -/var/www

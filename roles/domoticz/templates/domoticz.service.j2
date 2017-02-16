@@ -23,17 +23,17 @@ PrivateTmp=true
 PrivateDevices=true
 PrivateNetwork=true
 ProtectHome=true
-# This fails for some reason, yet ReadOnlyDirectories works fine
+# Conflicts with InaccessibleDirectories (/boot and maybe others)
 #ProtectSystem=full
 NoNewPrivileges=true
 
 ReadOnlyDirectories=/opt /proc /etc /run /usr -/bin -/sbin -/lib -/lib64
 ReadWriteDirectories=/opt/domoticz
 
-InaccessibleDirectories=/boot /etc -/lost+found /media /mnt /srv /sys \
+InaccessibleDirectories=/boot -/lost+found /media /mnt /srv /sys \
 -/usr/games -/usr/include -/usr/local -/usr/share -/usr/src -/var/backups \
 -/var/cache -/var/lib -/var/local -/var/lock -/var/log -/var/mail -/var/opt \
--/var/spool
+-/var/spool -/var/www
 
 [Install]
 WantedBy=multi-user.target
