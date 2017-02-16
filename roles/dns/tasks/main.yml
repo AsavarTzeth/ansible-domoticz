@@ -1,0 +1,12 @@
+---
+- name: set hostname
+  hostname: name=smarthub
+  become: true
+  tags: dns
+
+- name: setup hosts file
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+  become: true
+  tags: dns

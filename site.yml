@@ -5,6 +5,7 @@
   roles:
     - ssh
     - users
+    - dns
     - domoticz
     - ha-bridge
     - nginx
