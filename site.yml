@@ -6,4 +6,5 @@
     - ssh
     - users
     - domoticz
+    - ha-bridge
     - nginx

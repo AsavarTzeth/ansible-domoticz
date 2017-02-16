@@ -1,0 +1,35 @@
+[Unit]
+Description=Home Automation Bridge - Emulates Philips Hue Hub
+Wants=nginx.service
+After=nginx.service network.target
+PartOf=nginx.service
+JoinsNamespaceOf=nginx.service
+
+[Service]
+User=habridge
+Group=habridge
+ExecStart=/usr/bin/java -jar \
+-Dconfig.file=/opt/ha-bridge/data/habridge.config \
+-Dserver.port=8081 -Dserver.ip=127.0.0.1 \
+/opt/ha-bridge/ha-bridge.jar
+WorkingDirectory=/opt/ha-bridge
+#Restart=on-failure
+
+PrivateTmp=true
+PrivateDevices=true
+PrivateNetwork=true
+ProtectHome=true
+# Conflicts with InaccessibleDirectories (/boot and maybe others)
+#ProtectSystem=full
+NoNewPrivileges=true
+
+ReadOnlyDirectories=/opt /proc /etc /run /usr -/bin -/sbin -/lib -/lib64
+ReadWriteDirectories=/opt/ha-bridge
+
+InaccessibleDirectories=/boot -/lost+found /media /mnt /srv /sys \
+-/usr/games -/usr/include -/usr/local -/usr/share -/usr/src -/var/backups \
+-/var/cache -/var/lib -/var/local -/var/lock -/var/log -/var/mail -/var/opt \
+-/var/spool -/var/www
+
+[Install]
+WantedBy=multi-user.target

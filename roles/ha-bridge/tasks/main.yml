@@ -1,0 +1,59 @@
+---
+- block:
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
+    become: false
+
+  - name: get latest version
+    uri:
+      url: https://api.github.com/repos/bwssytems/ha-bridge/releases/latest
+      return_content: true
+      timeout: 6
+    register: api_info
+    become: false
+
+  - name: setup habridge user
+    user:
+      name: habridge
+      home: /opt/ha-bridge
+      shell: /bin/false
+      system: true
+
+#  - name: setup app dir
+#    file:
+#      path: /opt/ha-bridge
+#      state: directory
+#      owner: domoticz
+#      group: domoticz
+
+  - name: get ha-bridge.jar
+    get_url:
+      url: "{{ item.browser_download_url }}"
+      dest: /opt/ha-bridge/ha-bridge.jar
+    with_items: "{{ api_info.json.assets }}"
+    become_user: domoticz
+
+  - name: install java runtime
+    package:
+      name: "{{ jre_pkg_name }}"
+      state: present
+    args:
+      update_cache: true
+
+  - name: setup ha-bridge.service
+    template:
+      src: ha-bridge.service.j2
+      dest: /etc/systemd/system/ha-bridge.service
+      mode: 0644
+    notify: restart ha-bridge
+
+  - name: enable ha-bridge.service
+    systemd:
+      name: ha-bridge.service
+      enabled: true
+      daemon_reload: true
+
+  become: true
+  tags: ha-bridge
