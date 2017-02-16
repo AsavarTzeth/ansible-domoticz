@@ -21,19 +21,12 @@
       shell: /bin/false
       system: true
 
-#  - name: setup app dir
-#    file:
-#      path: /opt/ha-bridge
-#      state: directory
-#      owner: domoticz
-#      group: domoticz
-
   - name: get ha-bridge.jar
     get_url:
       url: "{{ item.browser_download_url }}"
       dest: /opt/ha-bridge/ha-bridge.jar
     with_items: "{{ api_info.json.assets }}"
-    become_user: domoticz
+    become_user: habridge
 
   - name: install java runtime
     package:
