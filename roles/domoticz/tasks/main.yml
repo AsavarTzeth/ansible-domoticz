@@ -6,6 +6,7 @@
       home: /opt/domoticz
       shell: /bin/false
       system: true
+      groups: dialout
 
   - block:
     - name: get domoticz
