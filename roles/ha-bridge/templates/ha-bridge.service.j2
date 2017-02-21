@@ -2,8 +2,8 @@
 Description=Home Automation Bridge - Emulates Philips Hue Hub
 Wants=nginx.service
 After=nginx.service network.target
-PartOf=nginx.service
-JoinsNamespaceOf=nginx.service
+#PartOf=nginx.service
+#JoinsNamespaceOf=nginx.service
 
 [Service]
 User=habridge
@@ -17,7 +17,7 @@ WorkingDirectory=/opt/ha-bridge
 
 PrivateTmp=true
 PrivateDevices=true
-PrivateNetwork=true
+PrivateNetwork=false
 ProtectHome=true
 # Conflicts with InaccessibleDirectories (/boot and maybe others)
 #ProtectSystem=full

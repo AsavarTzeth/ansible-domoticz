@@ -2,8 +2,8 @@
 Description=Domoticz Home Automation Service
 Wants=nginx.service
 After=nginx.service
-PartOf=nginx.service
-JoinsNamespaceOf=nginx.service
+#PartOf=nginx.service
+#JoinsNamespaceOf=nginx.service
 
 [Service]
 User=domoticz
@@ -21,7 +21,7 @@ RestartSec=1m
 
 PrivateTmp=true
 PrivateDevices=false
-PrivateNetwork=true
+PrivateNetwork=false
 ProtectHome=true
 # Conflicts with InaccessibleDirectories (/boot and maybe others)
 #ProtectSystem=full
