@@ -1,7 +1,7 @@
 ---
 nginx_config:
-  - src: domoticz.j2
-    dest: /etc/nginx/sites-available/domoticz
+  - src: smarthub.j2
+    dest: /etc/nginx/sites-available/smarthub
   - src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
   - src: nginx.service.j2
@@ -14,8 +14,8 @@ nginx_config:
     dest: /etc/tmpfiles.d/nginx.conf
 
 nginx_files:
-  - src: /etc/nginx/sites-available/domoticz
-    path: /etc/nginx/sites-enabled/domoticz
+  - src: /etc/nginx/sites-available/smarthub
+    path: /etc/nginx/sites-enabled/smarthub
     state: link
   - path: /etc/nginx/sites-enabled/default
     state: absent
