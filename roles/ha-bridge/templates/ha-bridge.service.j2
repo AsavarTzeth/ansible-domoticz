@@ -31,5 +31,10 @@ InaccessibleDirectories=/boot -/lost+found /media /mnt /srv /sys \
 -/var/cache -/var/lib -/var/local -/var/lock -/var/log -/var/mail -/var/opt \
 -/var/spool -/var/www
 
+# Would be nice with some systemd version fact to conditionally enable features
+ProtectKernelModules=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictRealtime=true
+
 [Install]
 WantedBy=multi-user.target
