@@ -1,2 +1,6 @@
 ssh_port: 22
 ssh_socket_bind_device: "{{ ansible_default_ipv4.interface }}"
+
+# This is default because Debian should provide Alias=
+ssh_systemd_socket: sshd.socket
+ssh_systemd_service: sshd.service

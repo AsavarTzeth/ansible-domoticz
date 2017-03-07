@@ -19,18 +19,18 @@
 
 - name: setup ssh.socket.d dir
   file:
-    path: /etc/systemd/system/ssh.socket.d
+    path: /etc/systemd/system/{{ ssh_systemd_socket }}.d
     state: directory
   become: true
   tags: ssh
 
 - name: setup ssh.socket override
   template:
-    src: ssh.socket.d.override.conf
-    dest: /etc/systemd/system/ssh.socket.d/override.conf
+    src: "{{ ssh_systemd_socket }}.d.override.conf"
+    dest: /etc/systemd/system/{{ ssh_systemd_socket }}.d/override.conf
     mode: 0644
   notify:
-    - start ssh.socket
-    - stop ssh.service
+    - start ssh socket
+    - stop ssh service
   become: true      
   tags: ssh

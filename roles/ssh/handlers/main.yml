@@ -1,15 +1,17 @@
 ---
-- name: start ssh.socket
+- name: start "{{ ssh_systemd_socket }}"
   systemd:
-    name: ssh.socket
+    name: "{{ ssh_systemd_socket }}"
     state: started
     enabled: true
     daemon_reload: true
+  listen: start ssh socket
   become: true
 
-- name: stop ssh.service
+- name: stop "{{ ssh_systemd_service }}"
   systemd:
-    name: ssh.service
+    name: "{{ ssh_systemd_service }}"
     state: stopped
     enabled: false
+  listen: stop ssh service
   become: true

@@ -1,2 +1,4 @@
 ---
 ssh_sftp_subsystem_path: /usr/lib/openssh/sftp-server
+ssh_systemd_socket: ssh.socket
+ssh_systemd_service: ssh.service
