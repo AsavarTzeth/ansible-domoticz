@@ -3,3 +3,6 @@ group_vars/raspberry.yml
 site.retry
 TODO
 raspberry
+testing
+staging
+production
