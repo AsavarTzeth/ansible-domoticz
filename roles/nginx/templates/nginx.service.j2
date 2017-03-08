@@ -24,8 +24,10 @@ InaccessibleDirectories=/boot -/lost+found /media /mnt /opt /srv /sys \
 -/usr/games -/usr/include -/usr/local -/usr/share -/usr/src -/var/backups \
 -/var/cache -/var/local -/var/lock -/var/mail -/var/opt -/var/spool -/var/www
 
-# Would be nice with some systemd version fact to conditionally enable features
+# Temporary workaround. Trying to get upstream service_mgr_version variable.
+{% if ansible_distribution_release != 'jessie' %}
 MemoryDenyWriteExecute=true
 ProtectKernelModules=true
 RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
 RestrictRealtime=true
+{% endif %}
