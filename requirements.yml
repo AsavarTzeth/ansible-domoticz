@@ -1,0 +1,9 @@
+---
+- src: https://github.com/AsavarTzeth/ansible-role-ssh
+  version: master
+  name: ssh
+  scm: git
+- src: https://github.com/AsavarTzeth/ansible-role-users
+  version: master
+  name: users
+  scm: git
