@@ -1,5 +1,6 @@
 [Unit]
 Description=Update Domoticz
+Wants=domoticz-get-update.service
 After=domoticz-get-update.service
 ConditionPathExists=/tmp/update.tgz
 ConditionPathExists=/tmp/update.tgz.sha256sum
