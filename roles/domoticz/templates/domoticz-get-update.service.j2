@@ -20,7 +20,6 @@ InaccessibleDirectories=/boot -/lost+found /media /mnt /srv /sys -/usr/games \
 -/usr/include -/usr/share -/usr/src -/var/backups -/var/cache -/var/lib \
 -/var/local -/var/lock -/var/log -/var/mail -/var/opt -/var/spool -/var/www
 
-# Temporary workaround. Trying to get upstream service_mgr_version variable.
 {% if ansible_distribution_release != 'jessie' %}
 ProtectKernelModules=true
 RestrictAddressFamilies=AF_INET AF_INET6
