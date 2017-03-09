@@ -12,7 +12,7 @@ ExecStart=/opt/domoticz/domoticz \
 -www 8080 -sslwww 0 \
 -wwwroot /opt/domoticz/www \
 -wwwbind 127.0.0.1 \
--dbase /opt/domoticz/domoticz.db \
+-dbase /opt/domoticz/db/domoticz.db \
 -userdata /opt/domoticz/ \
 -notimestamps
 WorkingDirectory=/opt/domoticz
@@ -28,7 +28,7 @@ ProtectHome=true
 NoNewPrivileges=true
 
 ReadOnlyDirectories=/opt /proc /etc /run /usr -/bin -/sbin -/lib -/lib64
-ReadWriteDirectories=/opt/domoticz
+ReadWriteDirectories=/opt/domoticz/db
 
 InaccessibleDirectories=/boot -/lost+found /media /mnt /srv /sys \
 -/usr/games -/usr/include -/usr/local -/usr/share -/usr/src -/var/backups \

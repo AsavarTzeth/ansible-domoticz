@@ -21,6 +21,12 @@
         dest: /opt/domoticz
         remote_src: true
 
+    - name: setup db dir
+      file:
+        path: /opt/domoticz/db
+        mode: 0750
+        state: directory
+
     become_user: domoticz
 
   - name: setup domoticz.service
