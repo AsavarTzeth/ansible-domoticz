@@ -30,11 +30,20 @@
       mode: 0644
     notify: restart domoticz
 
-  - name: enable domoticz.service
+  - name: setup domoticz-update.service
+    template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      mode: "{{ item.mode }}"
+    with_items: "{{ domoticz_templates }}"
+
+  - name: enable domoticz services
     systemd:
-      name: domoticz.service
+      name: "{{ item }}"
       enabled: true
+      state: started
       daemon_reload: true
+    with_items: "{{ domoticz_services }}"
 
   become: true
   tags: domoticz

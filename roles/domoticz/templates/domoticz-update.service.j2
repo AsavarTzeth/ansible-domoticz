@@ -1,0 +1,24 @@
+[Unit]
+Description=Update Domoticz
+After=domoticz-get-update.service
+ConditionPathExists=/tmp/update.tgz
+ConditionPathExists=/tmp/update.tgz.sha256sum
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/domoticz-update.sh /tmp /opt/domoticz
+
+PrivateDevices=true
+PrivateNetwork=true
+ProtectHome=true
+NoNewPrivileges=true
+
+ReadOnlyDirectories=/opt /proc /etc /run /usr -/bin -/sbin -/lib -/lib64
+ReadWriteDirectories=/opt/domoticz
+
+InaccessibleDirectories=/boot -/lost+found /media /mnt /srv /sys -/usr/games \
+-/usr/include -/usr/share -/usr/src -/var/backups -/var/cache -/var/lib \
+-/var/local -/var/lock -/var/log -/var/mail -/var/opt -/var/spool -/var/www
+
+[Install]
+WantedBy=multi-user.target

@@ -6,3 +6,22 @@ domoticz_params:
   - type=release&
   - system={{ ansible_system | lower }}&
   - machine={{ ansible_machine }}
+domoticz_templates:
+  - src: domoticz-get-update.service.j2
+    dest: /etc/systemd/system/domoticz-get-update.service
+    mode: '0644'
+  - src: domoticz-get-update.timer.j2
+    dest: /etc/systemd/system/domoticz-get-update.timer
+    mode: '0644'
+  - src: domoticz-get-update.py
+    dest: /usr/local/sbin/domoticz-get-update.py
+    mode: '0755'
+  - src: domoticz-update.service.j2
+    dest: /etc/systemd/system/domoticz-update.service
+    mode: '0644'
+  - src: domoticz-update.sh
+    dest: /usr/local/sbin/domoticz-update.sh
+    mode: '0755'
+domoticz_services:
+  - domoticz.service
+  - domoticz-get-update.timer

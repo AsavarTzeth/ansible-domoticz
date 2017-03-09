@@ -1,0 +1,31 @@
+[Unit]
+Description=Check for and download Domoticz updates
+Wants=domoticz-update.service
+Before=domoticz-update.service
+
+[Service]
+Type=oneshot
+User=domoticz
+Group=domoticz
+ExecStart=/usr/local/sbin/domoticz-get-update.py /tmp
+
+PrivateDevices=true
+ProtectHome=true
+NoNewPrivileges=true
+
+ReadOnlyDirectories=/opt /proc /etc /run /usr -/bin -/sbin -/lib -/lib64
+ReadWriteDirectories=/tmp
+
+InaccessibleDirectories=/boot -/lost+found /media /mnt /srv /sys -/usr/games \
+-/usr/include -/usr/share -/usr/src -/var/backups -/var/cache -/var/lib \
+-/var/local -/var/lock -/var/log -/var/mail -/var/opt -/var/spool -/var/www
+
+# Temporary workaround. Trying to get upstream service_mgr_version variable.
+{% if ansible_distribution_release != 'jessie' %}
+ProtectKernelModules=true
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictRealtime=true
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
