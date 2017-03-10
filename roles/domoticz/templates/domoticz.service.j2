@@ -11,7 +11,7 @@ Group=domoticz
 ExecStart=/opt/domoticz/domoticz \
 -www 8080 -sslwww 0 \
 -wwwroot /opt/domoticz/www \
--wwwbind 127.0.0.1 \
+-wwwbind {{ domoticz_listen }} \
 -dbase /opt/domoticz/db/domoticz.db \
 -userdata /opt/domoticz/ \
 -notimestamps

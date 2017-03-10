@@ -62,7 +62,7 @@ def _verify_checksums(files):
     return subprocess.call(cmd + [files[1]])
 
 def main(dl_dir):
-    query_url = 'http://127.0.0.1:8080/json.htm'
+    query_url = 'http://{{ domoticz_listen }}:8080/json.htm'
     files = ['update.tgz','update.tgz.sha256sum']
 
     # Change working directory to download directory

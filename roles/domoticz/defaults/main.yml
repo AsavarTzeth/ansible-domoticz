@@ -1,3 +1,5 @@
 ---
 # The Domoticz release channel (possible values: stable or beta)
 domoticz_release: stable
+# Listening address
+domoticz_listen: 127.0.0.1
