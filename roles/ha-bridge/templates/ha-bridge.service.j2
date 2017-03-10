@@ -10,7 +10,7 @@ User=habridge
 Group=habridge
 ExecStart=/usr/bin/java -jar \
 -Dconfig.file=/opt/ha-bridge/data/habridge.config \
--Dserver.port=8081 -Dserver.ip=127.0.0.1 \
+-Dserver.port=8081 -Dserver.ip={{ ha_bridge_listen }} \
 /opt/ha-bridge/ha-bridge.jar
 WorkingDirectory=/opt/ha-bridge
 #Restart=on-failure
