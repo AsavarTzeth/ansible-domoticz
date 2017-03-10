@@ -2,7 +2,7 @@
 domoticz_url: https://www.domoticz.com
 domoticz_params:
   - download.php?
-  - channel=stable&
+  - channel={{ domoticz_release }}&
   - type=release&
   - system={{ ansible_system | lower }}&
   - machine={{ ansible_machine }}

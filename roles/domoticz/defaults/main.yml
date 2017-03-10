@@ -1,0 +1,3 @@
+---
+# The Domoticz release channel (possible values: stable or beta)
+domoticz_release: stable
